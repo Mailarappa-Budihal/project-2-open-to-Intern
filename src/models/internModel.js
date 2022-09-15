@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const ObjectId = mongoose.Schema.Types.ObjectId
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const internSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
@@ -8,19 +8,19 @@ const internSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        minlength: 10, maxlength: 10,
-        trim: true
+        minlength: 10,
+        maxlength: 10,
+        trim: true,
     },
     collegeId: {
         type: ObjectId,
         required: true,
-        ref: 'college'
+        ref: "college",
     },
     isDeleted: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 }, { timestamps: true });
 
-module.exports = mongoose.model('intern', internSchema)
-    
+module.exports = mongoose.model("intern", internSchema);
