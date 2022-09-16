@@ -11,12 +11,12 @@ const isValid = function(value) {
 const createColleges = async function(req, res) {
     try {
         //.............take data from request body............
-        let requestBody = req.body;
-        if (Object.keys(requestBody).length === 0)
+        let data = req.body;
+        if (Object.keys(data).length === 0)
             return res
                 .status(400)
                 .send({ status: false, message: "Please enter College details" });
-        const { name, fullName, logoLink } = requestBody; //Destructuring
+        const { name, fullName, logoLink } = data; //Destructuring
 
         if (!isValid(name))
             return res
@@ -62,11 +62,11 @@ const createColleges = async function(req, res) {
         const unique = await collegeModel.findOne({ name: name });
         if (unique)
             return res
-                .status(401)
+                .status(400)
                 .send({ status: false, message: "College Allready Exist" });
 
         //.............creating college............
-        let collegeCreate = await collegeModel.create(requestBody);
+        let collegeCreate = await collegeModel.create(data);
         res
             .status(201)
             .send({
