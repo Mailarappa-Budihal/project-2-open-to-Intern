@@ -56,7 +56,7 @@ const createColleges = async function(req, res) {
         if (!regx.test(logoLink))
             return res
                 .status(400)
-                .send({ status: false, message: "Enter Valid Url" });
+                .send({ status: false, message: "Enter Valid logoLink  Url" });
 
         //.............checking college name............
         const unique = await collegeModel.findOne({ name: name });

@@ -42,15 +42,15 @@ const createIntern = async function(req, res) {
                 .status(400)
                 .send({ message: "Please enter valid Mobile Number" });
         }
-        let mobData = await internModel.findOne({ mobile: mobile });
+        let mobileNumber = await internModel.findOne({ mobile: mobile });
 
         //.............when mobile number is already in use............
-        if (mobData)
+        if (mobileNumber)
             return res
                 .status(400)
                 .send({
                     status: false,
-                    msg: "Duplicate Mobile Number, Please Provide another!!",
+                    msg: " Mobile Number alraedy registered, Please Provide another!!",
                 });
 
         if (!isValid(email))
@@ -65,15 +65,15 @@ const createIntern = async function(req, res) {
                 .status(400)
                 .send({ status: false, message: "Enter Valid Email" });
 
-        let emailData = await internModel.findOne({ email: email });
+        let emailId = await internModel.findOne({ email: email });
 
         //.............when email is already in use............
-        if (emailData)
+        if (emailId)
             return res
                 .status(400)
                 .send({
                     status: false,
-                    msg: "Duplicate email found, Please try with another!!",
+                    msg: "This email already registered, Please try with another!!",
                 });
 
         if (!isValid(collegeName))
@@ -85,7 +85,7 @@ const createIntern = async function(req, res) {
         if (!college) {
             return res
                 .status(404)
-                .send({ status: false, message: `${collegeName} No college found!!` });
+                .send({ status: false, message: `${collegeName} No college found !!` });
         }
 
         //.............compare collegeId from college model to request and recieve collegeId in response............
