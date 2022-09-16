@@ -12,13 +12,13 @@ const isValid = function(value) {
 const createIntern = async function(req, res) {
     try {
         //.............take data from request body............
-        let data = req.body;
-        if (Object.keys(data).length === 0)
+        let requestBody = req.body;
+        if (Object.keys(requestBody).length === 0)
             return res
                 .status(400)
                 .send({ status: false, message: "Please enter Intern details" });
 
-        let { name, mobile, email, collegeName } = data;
+        let { name, mobile, email, collegeName } = requestBody;
         if (!isValid(name))
             return res
                 .status(400)
@@ -90,10 +90,10 @@ const createIntern = async function(req, res) {
 
         //.............compare collegeId from college model to request and recieve collegeId in response............
         const collegeId = college._id;
-        data["collegeId"] = collegeId;
+        requestBody["collegeId"] = collegeId;
 
         //.............creating interns............
-        let createIntern = await internModel.create(data);
+        let createIntern = await internModel.create(requestBody);
         res
             .status(201)
             .send({
